@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding | Healthcare at Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Lato', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Fixed Header with Glassmorphism */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .header-logo img {
+            height: 50px;
+        }
+
+        nav a {
+            color: #1c1c1e;
+            text-decoration: none;
+            margin: 0 15px;
+            position: relative;
+            padding-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #0071e3;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover::before {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        nav a:hover {
+            color: #0071e3;
+        }
+
+        /* Hero Section with Zoom-In Effect */
+        .hero {
+            margin-top: 5rem; /* Adjusted margin to accommodate fixed header */
+            text-align: center;
+            padding: 5rem 1rem;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            color: #333;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: zoomIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #1c1c1e;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero a {
+            background-color: #0071e3;
+            color: #ffffff;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .hero a:hover {
+            background-color: #80FF00;
+            transform: scale(1.05);
+        }
+
+        /* Form Styling */
+        form {
+            max-width: 1200px;
+            margin: 0 auto;
+            top: 200px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 10px;
+            background-color: #0071e3;
+            color: #ffffff;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #00c853;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 3rem 1rem;
+        }
+
+        .about,
+        .testimonials {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .about h2,
+        .features h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1c1c1e;
+        }
+
+        .about p,
+        .features .feature-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features {
+            background-color: #ffffff;
+        }
+
+        .features .feature-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features .feature-item {
+            flex: 1 1 300px;
+            margin: 1rem;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .features .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(43, 68, 42, 0.3);
+            background-color: chartreuse;
+        }
+
+        .features .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1c1c1e;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0071e3;
+            color: #ffffff;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        /* Animation */
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-logo">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.2z2VExCSRZCJN6axdxyN_gHaHa%26pid%3DApi&f=1&ipt=5951d4cf04d6ec8c14d6bf2e979b230f61082ee9cf6b72cf856513ba8825bccf&ipo=images" alt="Healthnovo Logo">
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="appointment.html">Book Appointment</a>
+            <a href="subscription.html">Subscription</a>
+            <a href="onboarding.html" style="color: #0071e3;">Careers</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Join Us</h1>
+        <p>Complete the form below to start your journey with Healthcare at Home. Provide accurate information so we can process your application efficiently.</p>
+        <p> <p> <p></p>
+        <form action="dashboard.html" method="post">
+            <div>
+                <input type="text" name="fullname" placeholder="Full Name" required>
+            </div>
+            <div>
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div>
+                <input type="text" name="qualification" placeholder="Qualification" required>
+            </div>
+            <div>
+                <select name="profession" required>
+                    <option value="" disabled selected>Select Profession</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="nurse">Nurse</option>
+                </select>
+            </div>
+            <div>
+                <textarea name="experience" placeholder="Briefly describe your experience" required></textarea>
+            </div>
+            <div>
+                <button type="submit" class="submit-button">Submit Application</button>
+            </div>
+        </form>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Healthcare at Home</h2>
+        <p>We connect experienced doctors and nurses with patients who need in-home care. Our mission is to provide quality healthcare in the comfort of patients' homes.</p>
+    </section>
+
+    <section id="features" class="features">
+        <h2>Why Join Us?</h2>
+        <div class="feature-list">
+            <div class="feature-item">
+                <h3>Flexible Hours</h3>
+                <p>Work when it suits you and maintain a healthy work-life balance.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Competitive Pay</h3>
+                <p>We offer competitive rates to ensure your hard work is well-rewarded.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Career Growth</h3>
+                <p>Opportunities to grow your career with ongoing training and development.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Healthcare at Home. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
